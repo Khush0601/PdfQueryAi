@@ -10,14 +10,17 @@ import pdfRoutes from "./routes/pdf.routes.js"
 
 const app = express();
 
+
+//middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//routes
 app.use("/api/v1/pdfQueryAi", pdfRoutes);
 
 
-
+// Connect to MongoDB
 mongoose.connect(DBConfig.DB_URL)
 const db = mongoose.connection;
 db.on("error", () => {
@@ -27,7 +30,7 @@ db.once("open", () => {
   console.log("Connected to MongoDB successfully");
 });
 
-
+//start the server
 app.listen(AppConfig.PORT, () => {
   console.log(`Server running on port ${AppConfig.PORT}`);
 });

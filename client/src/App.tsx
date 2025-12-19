@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const BASE_URL = "https://pdfqueryai-y8a2.onrender.com";
 
 const App: React.FC = () => {
   const [question, setQuestion] = useState("");
@@ -107,7 +110,9 @@ const App: React.FC = () => {
         {/* Response */}
         {response && (
           <div className="mt-4 p-4 bg-gray-100 rounded-xl text-gray-800 whitespace-pre-wrap">
-            {response}
+           <ReactMarkdown remarkPlugins={[remarkGfm]}>
+    {response}
+  </ReactMarkdown>
           </div>
         )}
       </div>
